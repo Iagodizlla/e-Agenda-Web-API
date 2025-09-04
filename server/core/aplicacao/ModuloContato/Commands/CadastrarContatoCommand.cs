@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 
-namespace eAgenda.Core.Aplicacao.ModuloContato.Cadastrar;
+namespace eAgenda.Core.Aplicacao.ModuloContato.Commands;
 
 public record CadastrarContatoCommand(
     string Nome,
@@ -10,3 +10,5 @@ public record CadastrarContatoCommand(
     string? Empresa,
     string? Cargo
 ) : IRequest<Result<CadastrarContatoResult>>;
+
+public record CadastrarContatoResult(Guid Id);

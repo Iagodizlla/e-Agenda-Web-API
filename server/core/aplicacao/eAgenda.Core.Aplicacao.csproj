@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ModuloContato\NewFolder\**" />
-    <EmbeddedResource Remove="ModuloContato\NewFolder\**" />
-    <None Remove="ModuloContato\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentResults" Version="4.0.0" />
     <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
