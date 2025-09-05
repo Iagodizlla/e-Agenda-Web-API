@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace eAgenda.WebApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("contatos")]
 public class ContatoController(IMediator mediator) : ControllerBase
 {
     
@@ -32,6 +32,47 @@ public class ContatoController(IMediator mediator) : ControllerBase
         return Created(string.Empty, response);
     }
 
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<EditarContatoResponse>> Editar(Guid id, EditarContatoRequest request)
+    {
+        var command = new EditarContatoCommand(
+           id,
+           request.Nome,
+           request.Telefone,
+           request.Email,
+           request.Empresa,
+           request.Cargo
+       );
+
+        var result = await mediator.Send(command);
+
+        if (result.IsFailed)
+            return BadRequest();
+
+        var response = new EditarContatoResponse(
+            result.Value.Nome,
+            result.Value.Telefone,
+            result.Value.Email,
+            result.Value.Empresa,
+            result.Value.Cargo
+        );
+
+        return Ok(response);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<ActionResult<EditarContatoResponse>> Excluir(Guid id)
+    {
+        var command = new ExcluirContatoCommand(id);
+
+        var result = await mediator.Send(command);
+
+        if (result.IsFailed)
+            return BadRequest();
+
+        return NoContent();
+    }
+
     [HttpGet]
     public async Task<ActionResult<SelecionarContatosResponse>> SelecionarRegistros(
         [FromQuery] SelecionarContatosRequest? request
@@ -53,7 +94,7 @@ public class ContatoController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<SelecionarContatosResponse>> SelecionarRegistroPorId(Guid id)
+    public async Task<ActionResult<SelecionarContatoPorIdResponse>> SelecionarRegistroPorId(Guid id)
     {
         var query = new SelecionarContatoPorIdQuery(id);
 
