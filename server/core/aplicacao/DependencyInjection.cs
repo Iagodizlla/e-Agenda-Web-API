@@ -23,6 +23,17 @@ public static class DependencyInjection
             config.RegisterServicesFromAssembly(assembly);
         });
 
+        services.AddAutoMapper(config =>
+        {
+            var licenseKey = configuration["AUTOMAPPER_LICENSE_KEY"];
+
+            if (string.IsNullOrWhiteSpace(licenseKey))
+                throw new Exception("A variável AUTOMAPPER_LICENSE_KEY não foi fornecida.");
+
+            config.LicenseKey = licenseKey;
+
+        }, typeof(DependencyInjection).Assembly);
+
         return services;
     }
    
