@@ -2,11 +2,9 @@
 using eAgenda.Core.Aplicacao.ModuloContato.Commands;
 using eAgenda.Core.Dominio.ModuloContato;
 using AutoMapper;
-using eAgenda.Core.Aplicacao.Compartilhado;
 using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Collections.Immutable;
 
 namespace eAgenda.Core.Aplicacao.ModuloContato.Handlers;
 

@@ -16,20 +16,22 @@ public static class DependencyInjection
     {
         services.AddSerilogConfig(logging, configuration);
 
+        var licenseKey = configuration["AUTOMAPPER_LICENSE_KEY"];
+
+        if (string.IsNullOrWhiteSpace(licenseKey))
+            throw new Exception("A variável AUTOMAPPER_LICENSE_KEY não foi fornecida.");
+
         services.AddMediatR(config =>
         {
             var assembly = typeof(DependencyInjection).Assembly;
 
             config.RegisterServicesFromAssembly(assembly);
+
+            config.LicenseKey = licenseKey;
         });
 
         services.AddAutoMapper(config =>
         {
-            var licenseKey = configuration["AUTOMAPPER_LICENSE_KEY"];
-
-            if (string.IsNullOrWhiteSpace(licenseKey))
-                throw new Exception("A variável AUTOMAPPER_LICENSE_KEY não foi fornecida.");
-
             config.LicenseKey = licenseKey;
 
         }, typeof(DependencyInjection).Assembly);
