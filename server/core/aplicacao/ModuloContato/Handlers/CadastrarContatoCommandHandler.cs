@@ -2,7 +2,7 @@
 using eAgenda.Core.Aplicacao.ModuloContato.Commands;
 using eAgenda.Core.Dominio.Compartilhado;
 using AutoMapper;
-using eAgenda.Core.Aplicacao.Compartilhado;
+using eAgenda.Core.Dominio.ModuloAutenticacao;
 using eAgenda.Core.Dominio.ModuloContato;
 using FluentResults;
 using MediatR;
@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 namespace eAgenda.Core.Aplicacao.ModuloContato.Handles;
 
 public class CadastrarContatoCommandHandler(
+    ITenantProvider tenantProvider,
     IValidator<CadastrarContatoCommand> validator,
     IMapper mapper,
     IRepositorioContato repositorioContato,
@@ -41,6 +42,8 @@ public class CadastrarContatoCommandHandler(
         try
         {
             var contato = mapper.Map<Contato>(command);
+
+            contato.UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault();
 
             await repositorioContato.CadastrarAsync(contato);
 

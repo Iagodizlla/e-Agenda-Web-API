@@ -21,4 +21,8 @@
     <ProjectReference Include="..\dominio\eAgenda.Core.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ModuloAutenticacao\Mandlers\" />
+  </ItemGroup>
+
 </Project>
