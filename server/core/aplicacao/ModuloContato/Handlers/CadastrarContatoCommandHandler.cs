@@ -13,12 +13,12 @@ using Microsoft.Extensions.Logging;
 namespace eAgenda.Core.Aplicacao.ModuloContato.Handles;
 
 public class CadastrarContatoCommandHandler(
-    ITenantProvider tenantProvider,
-    IValidator<CadastrarContatoCommand> validator,
-    IMapper mapper,
     IRepositorioContato repositorioContato,
+    ITenantProvider tenantProvider,
     IUnitOfWork unitOfWork,
+    IMapper mapper,
     IDistributedCache cache,
+    IValidator<CadastrarContatoCommand> validator,
     ILogger<CadastrarContatoCommandHandler> logger
 ) : IRequestHandler<CadastrarContatoCommand, Result<CadastrarContatoResult>>
 {

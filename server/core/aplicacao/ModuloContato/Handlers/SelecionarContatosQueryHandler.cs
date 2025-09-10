@@ -12,9 +12,9 @@ using Microsoft.Extensions.Logging;
 namespace eAgenda.Core.Aplicacao.ModuloContato.Handlers;
 
 public class SelecionarContatosQueryHandler(
-    IMapper mapper,
     IRepositorioContato repositorioContato,
     ITenantProvider tenantProvider,
+    IMapper mapper,
     IDistributedCache cache,
     ILogger<SelecionarContatosQueryHandler> logger
 ) : IRequestHandler<SelecionarContatosQuery, Result<SelecionarContatosResult>>
