@@ -39,6 +39,17 @@ public static class DependencyInjection
 
         services.AddValidatorsFromAssembly(assembly);
 
+        var redisConnectionString = configuration["REDIS_CONNECTION_STRING"];
+
+        if (string.IsNullOrWhiteSpace(redisConnectionString))
+            throw new Exception("A variável REDIS_CONNECTION_STRING não foi fornecida.");
+
+        services.AddStackExchangeRedisCache(opt =>
+        {
+            opt.Configuration = redisConnectionString;
+            opt.InstanceName = "eagenda";
+        });
+
         return services;
     }
    

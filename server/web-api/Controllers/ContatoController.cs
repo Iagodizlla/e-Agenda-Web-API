@@ -71,12 +71,13 @@ public class ContatoController(IMediator mediator, IMapper mapper) : ControllerB
 
     [HttpGet]
     public async Task<ActionResult<SelecionarContatosResponse>> SelecionarRegistros(
-        [FromQuery] SelecionarContatosRequest? request
+        [FromQuery] SelecionarContatosRequest? request,
+        CancellationToken cancellationToken
     )
     {
         var query = mapper.Map<SelecionarContatosQuery>(request);
 
-        var result = await mediator.Send(query);
+        var result = await mediator.Send(query, cancellationToken);
 
         if (result.IsFailed)
             return BadRequest();
