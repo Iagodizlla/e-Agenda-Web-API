@@ -38,6 +38,9 @@ public class AppDbContext(DbContextOptions options, ITenantProvider? tenantProvi
 
             modelBuilder.Entity<Tarefa>()
                 .HasQueryFilter(x => x.UsuarioId.Equals(tenantProvider.UsuarioId));
+
+            modelBuilder.Entity<ItemTarefa>()
+                .HasQueryFilter(x => x.UsuarioId.Equals(tenantProvider.UsuarioId));
         }
 
         var assembly = typeof(AppDbContext).Assembly;
