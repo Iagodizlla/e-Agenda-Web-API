@@ -1,4 +1,5 @@
-﻿using eAgenda.Core.Dominio.ModuloAutenticacao;
+﻿using eAgenda.Core.Aplicacao.ModuloAutenticacao;
+using eAgenda.Core.Dominio.ModuloAutenticacao;
 using eAgenda.Infraestrutura.Orm.Compartilhado;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,7 @@ public static class IdentityConfig
     public static void AddIdentityProviderConfig(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<ITenantProvider, IdentityTenantProvider>();
+        services.AddScoped<ITokenProvider, JwtProvider>();
 
         services.AddIdentity<Usuario, Cargo>(options =>
         {
