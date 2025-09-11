@@ -7,13 +7,13 @@ using System.Text;
 
 namespace eAgenda.Core.Aplicacao.ModuloAutenticacao;
 
-public class JwtProvider : ITokenProvider
+public class AccessTokenProvider : ITokenProvider
 {
     private readonly string audienciaValida;
     private readonly string chaveAssinaturaJwt;
     private readonly DateTime expiracaoJwt;
 
-    public JwtProvider(IConfiguration config)
+    public AccessTokenProvider(IConfiguration config)
     {
         if (string.IsNullOrEmpty(config["JWT_GENERATION_KEY"]))
             throw new ArgumentException("Cifra de geração de tokens não configurada");
